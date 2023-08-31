@@ -1,104 +1,8 @@
-class Partita {
-public:
-	Player player1;
-	Player player2;
-	Info info;
-	
-	
-	void initialize_decks()
-	{
-		DeckOfCards deck;
-		deck.populate40();
-		deck.shuffle();
-		auto pair = deck.split_deck();
-    		Player1.deck1 = pair.first;
-    		Player2.deck2 = pair.second;
-	}
-	
-	void swap_turn(Player* a, Player* b)
-	{
-		Player* temp = a;
-		a = b;
-		b = temp;
-	}
-	
-	
-	
-	
-	bool spoglio()
-	{	//inizializzo spoglio 
-		DeckOfCards mezzo; 
-		bool spoglio_in_corso = true;
-		bool fine_partita = false;
-		bool inizio_debito = false;
-		Info.a_chi_tocca->debt=1; 
-		
-		while (spoglio_in_corso and !fine_partita)
-		{			
-			while ( Info.a_chi_tocca->debt>0)
-			{
-				auto carta_giocata = Info.a_chi_tocca->dealCard();
-				mezzo.carta_nel_mazzo(carta_giocata);
-				Info.num_carte_giocate++;
-				if(Info.a_chi_tocca->deck.cardsRemaining()==0)
-				{
-					fine_partita=true;
-					Info.vincitore = Info.a_chi_non_tocca;
-					Info.perdente = Info.a_chi_tocca;
-					break;
-				};
-				//esamina carta e aumentare/diminuire il debito e aumentare l'altro
-				switch (carta_giocata.rank)
-				{
-            				case ACE: 
-            					Info.a_chi_tocca->debt=0;
-            					Info.a_chi_non_tocca->debt=1;
-            					swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            					inizio_debito = true;
-            					break;
-            				case JACK:
-            					Info.a_chi_tocca->debt=0;
-            					Info.a_chi_non_tocca->debt=2;
-            					swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            					inizio_debito = true;
-            					break;
-            				case QUEEN:
-            					Info.a_chi_tocca->debt=0;
-            					Info.a_chi_non_tocca->debt=3;
-            					swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            					inizio_debito = true;
-            					break;            				
-            				case KING:
-            					Info.a_chi_tocca->debt=0;
-            					Info.a_chi_non_tocca->debt=4;
-            					swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            					inizio_debito = true;
-            					break;
-            				default:
-            				       Info.a_chi_tocca->debt--;
-            				       if(Info.a_chi_tocca->debt==0 and inizio_debito == true)
-            				       {
-            				       	spoglio_in_corso = false;
-            				       	Info.a_chi_non_tocca->deck.tiraSU(mezzo); //mezzo viene distrutto usciti da spoglio
-            				       	swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            				       	break;
-            				       }
-            				       else if(Info.a_chi_tocca->debt==0 and inizio_debito == false)
-            				       {	
-            				       	Info.a_chi_non_tocca->debt=1;
-            				       	swap_turn(Info.a_chi_tocca,Info.a_chi_non_tocca);
-            				       	break;
-            				       }  
-        			}
-			}	 
-		}
-		return fine_partita;
-	}
-	
-	
+#ifndef PARTITA_HPP_
+#define PARTITA_HPP_
 
-}
-
+#include <Player.hpp>
+#include <DeckOfCards.hpp>
 
 class Info{
 public:
@@ -109,4 +13,103 @@ public:
 	Player* perdente;
 	int num_carte_giocate = 0;
 
-}
+};
+
+class Partita {
+public:
+	Player player1;
+	Player player2;
+	Info info;
+	
+	enum Rank { ASSO = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, FANTE, CAVALLO, RE };
+    	enum Suit { SPADE, BASTONI, COPPE, DENARI };
+	
+	
+	void initialize_decks()
+	{
+		DeckOfCards deck;
+		deck.populate40();
+		deck.shuffle();
+		auto pair = deck.split_deck();
+    		player1.deck = pair.first;
+    		player2.deck = pair.second;
+	}
+	
+	void swap_turn()
+	{
+		Player* temp = info.a_chi_tocca;
+		info.a_chi_tocca = info.a_chi_non_tocca;
+		info.a_chi_non_tocca = temp;
+	}
+	
+	void initialize_game()
+	{
+		info.a_chi_tocca = &player1;
+		info.a_chi_non_tocca = &player2;
+		initialize_decks();
+	}	
+	
+	
+	bool spoglio()
+	{	//inizializzo spoglio 
+		DeckOfCards mezzo; 
+		bool spoglio_in_corso = true;
+		bool fine_partita = false;
+		bool inizio_debito = false;
+		
+		info.a_chi_tocca->debt=1; 
+		
+		while (spoglio_in_corso and !fine_partita)
+		{		
+			while ( info.a_chi_tocca->debt>0)
+			{	
+				
+				auto carta_giocata = info.a_chi_tocca->deck.dealCard();
+				mezzo.carta_nel_mazzo(carta_giocata);
+				info.num_carte_giocate++;
+
+				
+				if(info.a_chi_tocca->deck.cardsRemaining()==0)
+				{
+					fine_partita=true;
+					info.vincitore = info.a_chi_non_tocca;
+					info.perdente = info.a_chi_tocca;
+					break;
+				};
+				//esamina carta e aumentare/diminuire il debito e aumentare l'altro
+				std::cout << std::to_string(carta_giocata.rank) << std::endl;
+				switch (carta_giocata.rank)
+				{
+            		case ASSO:
+					case FANTE:
+					case CAVALLO:
+					case RE: 
+						info.a_chi_tocca->debt=0;
+						info.a_chi_non_tocca->debt=carta_giocata.getDebt();
+						swap_turn();
+						inizio_debito = true;
+						break;
+            		default:
+						info.a_chi_tocca->debt--;
+						if(info.a_chi_tocca->debt==0 and inizio_debito == true)
+						{
+							spoglio_in_corso = false;
+							info.a_chi_non_tocca->deck.tiraSu(mezzo); //mezzo viene distrutto usciti da spoglio
+							swap_turn();
+							break;
+						}
+						else if(info.a_chi_tocca->debt==0 and inizio_debito == false)
+						{	
+							info.a_chi_non_tocca->debt=1;
+							swap_turn();
+							break;
+						}  
+        			}
+			}	 
+		}
+		return fine_partita;
+	}
+	
+};
+
+#endif

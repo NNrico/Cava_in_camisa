@@ -1,3 +1,6 @@
+#ifndef DECK_OF_CARDS_HPP_
+#define DECK_OF_CARDS_HPP_
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,8 +10,8 @@
 
 class Card {
 public:
-    enum Rank { ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, JACK, QUEEN, KING };
-    enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
+    enum Rank { ASSO = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, FANTE, CAVALLO, RE };
+    enum Suit { SPADE, BASTONI, COPPE, DENARI };
 
     Card(Rank rank, Suit suit) : rank(rank), suit(suit) {}
 
@@ -17,10 +20,10 @@ public:
     	int debt;
     	switch (rank)
     	{
-            case ACE: debt = 1; break;
-            case JACK: debt = 2; break;
-            case QUEEN: debt = 3; break;
-            case KING: debt = 4; break;
+            case ASSO: debt = 1; break;
+            case FANTE: debt = 2; break;
+            case CAVALLO: debt = 3; break;
+            case RE: debt = 4; break;
             default: debt = 0; break;
         }
         
@@ -31,22 +34,22 @@ public:
     std::string toString() const {
         std::string rankStr;
         switch (rank) {
-            case ACE: rankStr = "Ace"; break;
-            case JACK: rankStr = "Jack"; break;
-            case QUEEN: rankStr = "Queen"; break;
-            case KING: rankStr = "King"; break;
+            case ASSO: rankStr = "ASSO"; break;
+            case FANTE: rankStr = "FANTE"; break;
+            case CAVALLO: rankStr = "CAVALLO"; break;
+            case RE: rankStr = "RE"; break;
             default: rankStr = std::to_string(rank); break;
         }
 
         std::string suitStr;
         switch (suit) {
-            case CLUBS: suitStr = "Clubs"; break;
-            case DIAMONDS: suitStr = "Diamonds"; break;
-            case HEARTS: suitStr = "Hearts"; break;
-            case SPADES: suitStr = "Spades"; break;
+            case SPADE: suitStr = "SPADE"; break;
+            case BASTONI: suitStr = "BASTONI"; break;
+            case COPPE: suitStr = "COPPE"; break;
+            case DENARI: suitStr = "DENARI"; break;
         }
 
-        return rankStr + " of " + suitStr;
+        return rankStr + " di " + suitStr;
     }
 
     Rank rank;
@@ -58,8 +61,8 @@ public:
     void populate40() //populate a deck with 40 cards
     {
     	// inserire check se è vuoto popula altrimenti errore
-        for (int suit = Card::CLUBS; suit <= Card::SPADES; ++suit) {
-            for (int rank = Card::ACE; rank <= Card::KING; ++rank) {
+        for (int suit = Card::SPADE; suit <= Card::DENARI; ++suit) {
+            for (int rank = Card::ASSO; rank <= Card::RE; ++rank) {
                 cards.push_back(Card(static_cast<Card::Rank>(rank), static_cast<Card::Suit>(suit)));
             }
         }
@@ -140,5 +143,5 @@ private:
     std::vector<Card> cards;
 };
 
-
+#endif
 

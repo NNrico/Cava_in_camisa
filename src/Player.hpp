@@ -1,9 +1,14 @@
+#ifndef PLAYER_HPP_
+#define PLAYER_HPP_
+
 class Player {
 public:
 	DeckOfCards deck;
-	debt = 0;
+	int debt = 0;
 	
 
 
 
-}
+};
+
+#endif
