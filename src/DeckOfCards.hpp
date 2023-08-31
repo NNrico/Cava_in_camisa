@@ -49,7 +49,6 @@ public:
         return rankStr + " of " + suitStr;
     }
 
-private:
     Rank rank;
     Suit suit;
 };
@@ -93,6 +92,17 @@ public:
 
         return std::make_pair(firstDeck, secondDeck);
     }
+    
+    void tiraSu(const DeckOfCards& otherDeck) 
+    {
+        cards.insert(cards.begin(), otherDeck.cards.rbegin(), otherDeck.cards.rend());
+        //otherDeck.clear();
+    }
+    
+    void carta_nel_mazzo(const Card& card) 
+    {
+        cards.push_back(card);
+    }
 
     void shuffle()
     {
@@ -117,6 +127,13 @@ public:
 
     size_t cardsRemaining() const {
         return cards.size();
+    }
+    
+    void print_deck() const 
+    {
+        for (const Card& card : cards) {
+            std::cout << card.toString() << std::endl;
+        }
     }
 
 private:
