@@ -67,12 +67,12 @@ public:
             }
         }
         
-        std::cout << "Deck populated with 40 cards" << std::endl;
+        //std::cout << "Deck populated with 40 cards" << std::endl;
     }
     
     DeckOfCards() //constructor for empty deck;
     {
-        std::cout << "Empty Deck created" << std::endl;
+        //std::cout << "Empty Deck created" << std::endl;
     }
     
     std::pair<DeckOfCards, DeckOfCards> split_deck() {
@@ -91,7 +91,7 @@ public:
         DeckOfCards secondDeck;
         secondDeck.cards = secondHalf;
         
-        std::cout << "Deck splitted" << std::endl;
+        //std::cout << "Deck splitted" << std::endl;
 
         return std::make_pair(firstDeck, secondDeck);
     }
@@ -119,10 +119,11 @@ public:
             std::swap(cards[i], cards[j]);   // Swap the elements at indices i and j
         }
         
-        std::cout << "Deck shuffled" << std::endl;
+        //std::cout << "Deck shuffled" << std::endl;
     }
 
-    Card dealCard() {
+    Card dealCard()
+    {
         Card card = cards.back();
         cards.pop_back();
         return card;

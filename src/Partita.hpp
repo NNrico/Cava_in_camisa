@@ -46,7 +46,17 @@ public:
 	{
 		info.a_chi_tocca = &player1;
 		info.a_chi_non_tocca = &player2;
+		player1.name = "player1";
+		player2.name = "player2";
 		initialize_decks();
+	}
+	
+	void game()
+	{
+	 	while (!spoglio()){}
+	 	
+	 	std::cout << "vincitore:" << info.vincitore->name << std::endl;
+	 	std::cout << "carte giocate:" << info.num_carte_giocate << std::endl;	
 	}	
 	
 	
@@ -67,20 +77,22 @@ public:
 				auto carta_giocata = info.a_chi_tocca->deck.dealCard();
 				mezzo.carta_nel_mazzo(carta_giocata);
 				info.num_carte_giocate++;
-
+				
+				//std::cout << std::to_string(carta_giocata.rank) << std::endl;
 				
 				if(info.a_chi_tocca->deck.cardsRemaining()==0)
 				{
+					info.a_chi_non_tocca->deck.tiraSu(mezzo);
 					fine_partita=true;
 					info.vincitore = info.a_chi_non_tocca;
 					info.perdente = info.a_chi_tocca;
 					break;
 				};
-				//esamina carta e aumentare/diminuire il debito e aumentare l'altro
-				std::cout << std::to_string(carta_giocata.rank) << std::endl;
+				
+				//esamina carta e scegliere il dà farsi
 				switch (carta_giocata.rank)
 				{
-            		case ASSO:
+            				case ASSO:
 					case FANTE:
 					case CAVALLO:
 					case RE: 
@@ -89,7 +101,7 @@ public:
 						swap_turn();
 						inizio_debito = true;
 						break;
-            		default:
+            				default:
 						info.a_chi_tocca->debt--;
 						if(info.a_chi_tocca->debt==0 and inizio_debito == true)
 						{

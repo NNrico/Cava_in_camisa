@@ -1,4 +1,4 @@
-// Your First C++ Program
+
 
 #include <iostream>
 #include <DeckOfCards.hpp>
@@ -6,28 +6,28 @@
 
 int main() {
 
-	Partita partita;
-	partita.initialize_game();
+	int num_partite=100;
+	int max_length = 0;
+	DeckOfCards deck1;
+	DeckOfCards deck2;
 	
-	std::cout << "deck1: " << std::endl;
-    partita.player1.deck.print_deck();
-    std::cout << "\n" << std::endl;
+	for(int i=0;i<num_partite;i++)
+	{
+		Partita partita;
+		partita.initialize_game();
+		partita.game();
+		if(max_length<partita.info.num_carte_giocate)
+		{
+			max_length = partita.info.num_carte_giocate;
+			deck1 = partita.player1.deck;
+			deck2 = partita.player2.deck;
+		}
+	}
 
-	std::cout << "deck2: " << std::endl;
-    partita.player2.deck.print_deck();
-    std::cout << "\n" << std::endl;
 
-	std::cout << "here" << std::endl;
     	
-    partita.spoglio();
+    	std::cout << "max_length:" << max_length << "in" << num_partite << "games" << std::endl;
     	
-    std::cout << "deck1: " << std::endl;
-    partita.player1.deck.print_deck();
-    std::cout << "\n" << std::endl;
-
-	std::cout << "deck2: " << std::endl;
-    partita.player2.deck.print_deck();
-    std::cout << "\n" << std::endl;
     
 	return 0;
 }
