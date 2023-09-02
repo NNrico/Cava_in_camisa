@@ -51,12 +51,23 @@ public:
 		initialize_decks();
 	}
 	
+	void initialize_game(DeckOfCards deck1, DeckOfCards deck2)
+	{
+		info.a_chi_tocca = &player1;
+		info.a_chi_non_tocca = &player2;
+		player1.name = "player1";
+		player2.name = "player2";
+		player1.deck = deck1;
+    		player2.deck = deck2;
+		
+	}
+	
 	void game()
 	{
 	 	while (!spoglio()){}
 	 	
-	 	std::cout << "vincitore:" << info.vincitore->name << std::endl;
-	 	std::cout << "carte giocate:" << info.num_carte_giocate << std::endl;	
+	 	//std::cout << "vincitore:" << info.vincitore->name << std::endl;
+	 	//std::cout << "carte giocate:" << info.num_carte_giocate << std::endl;	
 	}	
 	
 	
@@ -70,15 +81,10 @@ public:
 		info.a_chi_tocca->debt=1; 
 		
 		while (spoglio_in_corso and !fine_partita)
-		{		
+		{	
+			
 			while ( info.a_chi_tocca->debt>0)
 			{	
-				
-				auto carta_giocata = info.a_chi_tocca->deck.dealCard();
-				mezzo.carta_nel_mazzo(carta_giocata);
-				info.num_carte_giocate++;
-				
-				//std::cout << std::to_string(carta_giocata.rank) << std::endl;
 				
 				if(info.a_chi_tocca->deck.cardsRemaining()==0)
 				{
@@ -87,7 +93,16 @@ public:
 					info.vincitore = info.a_chi_non_tocca;
 					info.perdente = info.a_chi_tocca;
 					break;
-				};
+				};	
+				
+				auto carta_giocata = info.a_chi_tocca->deck.dealCard();
+				mezzo.carta_nel_mazzo(carta_giocata);
+				info.num_carte_giocate++;
+				
+				
+				//std::cout << std::to_string(carta_giocata.rank) << std::endl;
+				
+
 				
 				//esamina carta e scegliere il dà farsi
 				switch (carta_giocata.rank)
@@ -117,8 +132,16 @@ public:
 							break;
 						}  
         			}
-			}	 
+			}
+			
+			if(info.num_carte_giocate>10000)
+			{
+				fine_partita=true;
+				info.vincitore = info.a_chi_non_tocca;
+				info.perdente = info.a_chi_tocca;
+			} 
 		}
+		//std::cout << "fine:" <<info.num_carte_giocate << std::endl;
 		return fine_partita;
 	}
 	

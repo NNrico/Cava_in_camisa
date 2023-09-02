@@ -4,9 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm> // For std::random_shuffle
 #include <ctime>     // For std::time
 #include <cstdlib>   // For std::rand and std::srand
+#include <fstream>  // This is for ifstream
+
 
 class Card {
 public:
@@ -50,6 +51,34 @@ public:
         }
 
         return rankStr + " di " + suitStr;
+    }
+    
+     // A static method to create a Card object from a string
+    static Card fromString(const std::string& cardStr) {
+        // Initialize default values
+        Rank rank = ASSO;
+        Suit suit = SPADE;
+
+        // Define mappings for rank and suit strings
+        std::vector<std::string> rankStrings = { "ASSO", "2", "3", "4", "5", "6", "7", "FANTE", "CAVALLO", "RE" };
+        std::vector<std::string> suitStrings = {  "SPADE",  "BASTONI","COPPE", "DENARI"};
+
+        // Parse the card string
+        for (size_t i = 0; i < rankStrings.size(); ++i) {
+            if (cardStr.find(rankStrings[i]) != std::string::npos) {
+                rank = static_cast<Rank>(i + 1); // Rank values start from 1
+                break;
+            }
+        }
+
+        for (size_t i = 0; i < suitStrings.size(); ++i) {
+            if (cardStr.find(suitStrings[i]) != std::string::npos) {
+                suit = static_cast<Suit>(i);
+                break;
+            }
+        }
+
+        return Card(rank, suit);
     }
 
     Rank rank;
@@ -109,8 +138,7 @@ public:
 
     void shuffle()
     {
-        // Seed the random number generator
-        std::srand(static_cast<unsigned int>(std::time(nullptr)));
+        
 
         // Use Fisher-Yates shuffle algorithm
         for (size_t i = cards.size() - 1; i > 0; --i)
@@ -138,6 +166,48 @@ public:
         for (const Card& card : cards) {
             std::cout << card.toString() << std::endl;
         }
+        std::cout << "\n" << std::endl;
+    }
+    
+    const std::vector<Card>& getCards() const
+    {
+        return cards;
+    }
+    
+     // A method to load cards from a file
+    void loadFromFile(const std::string& filename) {
+        std::ifstream inputFile(filename);
+
+        if (!inputFile.is_open()) {
+            std::cerr << "Error: Unable to open the file for reading." << std::endl;
+            return;
+        }
+
+        cards.clear(); // Clear the current deck
+
+        std::string line;
+        while (std::getline(inputFile, line)) {
+            if (line.find("deck1:") != std::string::npos) {
+            
+                // Start reading cards for deck1
+                while (std::getline(inputFile, line)) {
+                    if (line.find("deck2:") != std::string::npos) {
+                        // Found the start of deck2, exit the loop
+                        break;
+                    }
+                    // Parse and add cards for deck1
+                    cards.push_back(Card::fromString(line));
+                }
+            } else if (line.find("deck2:") != std::string::npos) {
+                // Start reading cards for deck2
+                while (std::getline(inputFile, line)) {
+                    // Parse and add cards for deck2
+                    cards.push_back(Card::fromString(line));
+                }
+            }
+        }
+
+        inputFile.close();
     }
 
 private:
