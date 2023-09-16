@@ -7,12 +7,18 @@
 #include <Partita.hpp>
 
 
+
+
+
 int main() {
     DeckOfCards deck1;
     DeckOfCards deck2;
     
-    deck1.loadFromFile("deck1.txt");
-    deck2.loadFromFile("deck2.txt"); // Load deck1 and deck2 from the file
+    deck1.loadFromFile("deckprova1.txt");
+    deck2.loadFromFile("deckprova2.txt"); // Load deck1 and deck2 from the file
+    
+    deck1.print_deck();
+    deck2.print_deck();
     
     Partita partita;
     partita.initialize_game(deck1,deck2);

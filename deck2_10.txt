@@ -1,0 +1,6 @@
+deck2:
+ASSO di DENARI
+FANTE di DENARI
+RE di DENARI
+2 di DENARI
+7 di DENARI

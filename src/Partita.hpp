@@ -101,7 +101,6 @@ public:
 				
 				
 				//std::cout << std::to_string(carta_giocata.rank) << std::endl;
-				
 
 				
 				//esamina carta e scegliere il dà farsi
@@ -116,7 +115,7 @@ public:
 						swap_turn();
 						inizio_debito = true;
 						break;
-            				default:
+            		default:
 						info.a_chi_tocca->debt--;
 						if(info.a_chi_tocca->debt==0 and inizio_debito == true)
 						{

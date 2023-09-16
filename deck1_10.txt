@@ -1,0 +1,6 @@
+deck1:
+4 di DENARI
+CAVALLO di DENARI
+5 di DENARI
+3 di SPADE
+6 di DENARI

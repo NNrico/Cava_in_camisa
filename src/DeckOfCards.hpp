@@ -156,6 +156,27 @@ public:
         cards.pop_back();
         return card;
     }
+    
+    void addCard(Card card) {
+        cards.push_back(card);
+    }
+    
+    void convertVectorToDeck(const std::vector<int>& intVector) {
+        cards.clear(); // Clear the current deck
+
+        for (int intValue : intVector) {
+            Card::Rank rank = static_cast<Card::Rank>(intValue);
+            cards.push_back(Card(rank, Card::DENARI)); // All cards mapped to SPADES
+        }
+    }
+    
+    void AddVectorToDeck(const std::vector<int>& intVector) {
+        
+        for (int intValue : intVector) {
+            Card::Rank rank = static_cast<Card::Rank>(intValue);
+            cards.push_back(Card(rank, Card::DENARI)); // All cards mapped to SPADES
+        }
+    }
 
     size_t cardsRemaining() const {
         return cards.size();
