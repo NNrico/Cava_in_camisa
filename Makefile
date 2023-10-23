@@ -26,7 +26,7 @@ help:
 
 .PHONY : distclean
 distclean:
-		$(RM) main main_check main_check10 main_try
+		$(RM) main main_check main_check10 main_try 
 		$(RM) *.o
 
 main: $(SRCS1)

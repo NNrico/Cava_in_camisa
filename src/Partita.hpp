@@ -106,7 +106,7 @@ public:
 				//esamina carta e scegliere il dà farsi
 				switch (carta_giocata.rank)
 				{
-            				case ASSO:
+            		case ASSO:
 					case FANTE:
 					case CAVALLO:
 					case RE: 
