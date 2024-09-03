@@ -20,6 +20,10 @@ Ace: 1 card
 #### Players round rule:
 Whoever wins the middle deck plays first!
 
+## Found any sequence?
+No, it is likely that it does not exist. But one can still search for the longest game possible.
+
+## Longest game found?
 
 main_check.cpp carica deckprova1.txt e deckprova2.txt e gioca una partita con quelli
 
