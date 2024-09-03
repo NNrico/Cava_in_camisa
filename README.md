@@ -3,12 +3,12 @@
 
 ## What is Cava in camisa?
 
-It is a regional card game played with a deck of 40 cards.
+It is a regional card game played with a deck of 40 cards. The game after the deck is shuffled is deterministic.
 
 For the rules and details see the wikipedia [page](https://it.wikipedia.org/wiki/Straccia_camicia).
 
 ## What is the goal this project?
-The goal is to find (if there is one) a sequence of card leading to an infinite game of cava in camisa. 
+The goal is to find (if there is one) a starting deck leading to an infinite game of cava in camisa. 
 
 ## Rules adopted
 #### Card point system:
