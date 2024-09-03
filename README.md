@@ -1,6 +1,10 @@
 What is Cava in camisa?
 It is a regional card game with uses a deck of 40 cards. For the rules and details see https://it.wikipedia.org/wiki/Straccia_camicia.
 
+What is the goal this project?
+The goal is to find (if there is one) a sequnce of card leading to an infinite game of cava in camisa. 
+
+
 Re: 4 carte
 Cavallo: 3 carte
 Fante: 2 carte
