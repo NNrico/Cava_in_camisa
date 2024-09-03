@@ -1,16 +1,24 @@
-What is Cava in camisa?
-It is a regional card game with uses a deck of 40 cards. For the rules and details see https://it.wikipedia.org/wiki/Straccia_camicia.
-
-What is the goal this project?
-The goal is to find (if there is one) a sequnce of card leading to an infinite game of cava in camisa. 
+# Cava in camisa: infinite sequence?
 
 
-Re: 4 carte
-Cavallo: 3 carte
-Fante: 2 carte
-Asso: 1 carta
+## What is Cava in camisa?
 
-Chi prende il mazzo risponde per primo! 
+It is a regional card game played with a deck of 40 cards.
+
+For the rules and details see the wikipedia [page](https://it.wikipedia.org/wiki/Straccia_camicia).
+
+## What is the goal this project?
+The goal is to find (if there is one) a sequence of card leading to an infinite game of cava in camisa. 
+
+## Rules adopted
+#### Card point system:
+King: 4 cards
+Knight 3 cards
+Bishop: 2 cards
+Ace: 1 card
+
+#### Players round rule:
+Whoever wins the middle deck plays first!
 
 
 main_check.cpp carica deckprova1.txt e deckprova2.txt e gioca una partita con quelli
