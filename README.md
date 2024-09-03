@@ -13,8 +13,11 @@ The goal is to find (if there is one) a starting deck leading to an infinite gam
 ## Rules adopted
 #### Card point system:
 King: 4 cards
-Knight 3 cards
+
+Knight: 3 cards
+
 Bishop: 2 cards
+
 Ace: 1 card
 
 #### Players round rule:
@@ -26,7 +29,7 @@ No, it is likely that it does not exist. But one can still search for the longes
 ## Longest game found?
 See results.txt 
 
-
+## Miscellanous
 main_check.cpp carica deckprova1.txt e deckprova2.txt e gioca una partita con quelli
 
 main_check10.cpp carica il file data.txt che contiene tutti i possibili deck di 10 carte e trova le sequanze di 10 carte che divise in 2 deck portano ad avere una partita senza resto e li salva il seq.txt
