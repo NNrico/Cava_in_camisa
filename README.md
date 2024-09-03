@@ -1,4 +1,5 @@
-# Cava_in_camisa
+What is Cava in camisa?
+It is a regional card game with uses a deck of 40 cards. For the rules and details see https://it.wikipedia.org/wiki/Straccia_camicia.
 
 Re: 4 carte
 Cavallo: 3 carte
