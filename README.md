@@ -24,6 +24,8 @@ Whoever wins the middle deck plays first!
 No, it is likely that it does not exist. But one can still search for the longest game possible.
 
 ## Longest game found?
+See results.txt 
+
 
 main_check.cpp carica deckprova1.txt e deckprova2.txt e gioca una partita con quelli
 
