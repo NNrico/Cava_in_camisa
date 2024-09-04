@@ -106,7 +106,7 @@ public:
 				//esamina carta e scegliere il dà farsi
 				switch (carta_giocata.rank)
 				{
-            		case ASSO:
+            				case ASSO:
 					case FANTE:
 					case CAVALLO:
 					case RE: 
@@ -115,7 +115,7 @@ public:
 						swap_turn();
 						inizio_debito = true;
 						break;
-            		default:
+            				default:
 						info.a_chi_tocca->debt--;
 						if(info.a_chi_tocca->debt==0 and inizio_debito == true)
 						{
@@ -132,7 +132,7 @@ public:
 						}  
         			}
 			}
-			
+			// if we get here we found an infinite game probably  
 			if(info.num_carte_giocate>10000)
 			{
 				fine_partita=true;
