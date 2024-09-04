@@ -85,7 +85,7 @@ public:
 			
 			while ( info.a_chi_tocca->debt>0)
 			{	
-				
+				// check the player's deck remaining cards
 				if(info.a_chi_tocca->deck.cardsRemaining()==0)
 				{
 					info.a_chi_non_tocca->deck.tiraSu(mezzo);
